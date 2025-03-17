@@ -1,11 +1,11 @@
 # stats220
 # This is my repo for STATS 220.
 
-## **A little about me:**
+## A little about me:
 
 - I am undertaking a degree in _Commerce_ and _Science_,
   <br/>
-  Majoring in:
+  **Majoring in:**
   1. Business Analytics
   2. Finance
   3. Statistics
