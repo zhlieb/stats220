@@ -1,0 +1,53 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+library(tidyverse)
+```
+
+```{css}
+p {
+  font-family: "serif"
+
+}
+h2 {
+  font-family: "impact";
+}
+
+```
+
+## When do I see different animals during my commutes.
+My data captures the number of animals I see in a given commute, as well as the time of day that the commute took place. I want to analyse whether certain animals are more prevalent at specific times of day. 
+
+```{r}
+logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRInso6d7HiDopyL5_M_7liO5rjhMrZlL7tRn56HpdUJS86uiFCI3ulIMAnnBwwzijRSpdps2uE5ina/pub?output=csv")
+latest_data <- rename(logged_data,
+       total_animals = 2,
+       birds = 3,
+       dogs = 4,
+       cats = 5,
+       rodents = 6,
+       other = 7,
+       time_of_day = 8)
+
+#bar chart of cats spotted and time of day
+ggplot(data = latest_data) +
+  geom_bar(aes(x = cats, fill = time_of_day))
+#bar chart of birds spotted and time of day
+ggplot(data = latest_data) +
+  geom_bar(aes(x = birds, fill = time_of_day))
+mean_total <- mean(latest_data$total_animals)
+tot_rodents <- sum(latest_data$rodents)
+paste("On average, I saw", round(mean_total,2), "animals during my commutes.")
+paste("Across my data collection period, I saw", tot_rodents, 
+      if(tot_rodents == 1){
+    "rodent"
+}else{
+  "rodents"
+}
+, "during my commutes.")
+```
+
