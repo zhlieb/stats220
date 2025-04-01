@@ -42,7 +42,12 @@ ggplot(data = latest_data) +
 mean_total <- mean(latest_data$total_animals)
 tot_rodents <- sum(latest_data$rodents)
 paste("On average, I saw", round(mean_total,2), "animals during my commutes.")
-paste("Across my data collection period, I saw", tot_rodents, 
+paste("Across my data collection period, I saw",
+      if(tot_rodents == 0){
+        "no"
+      }else{
+        tot_rodents
+      }, 
       if(tot_rodents == 1){
     "rodent"
 }else{
